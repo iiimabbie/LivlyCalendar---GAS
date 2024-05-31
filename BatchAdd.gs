@@ -49,23 +49,25 @@ function addPoolEventsFromSheet() {
  */
 function addNoticeEventsFromSheet() {
     // 開始的行數為：3
-    var startRow = 3 - 1; // index，第?行就是?-1
+    var startRow = 11 - 1; // index，第?行就是?-1
     var rows = noticeSheet.getDataRange().getValues(); // 獲取所有列
 
     // 處理 startRow 行以後的每個行
     for (var i = startRow; i < rows.length; i++) {
+        var rcurr = null;
         var row = rows[i];
-        if (row[4] === "yearly") {
-            var rcurr = CalendarApp.newRecurrence().addYearlyRule();
-        };
 
-        if (row[4] === "weekly") {
-            var rcurr = CalendarApp.newRecurrence().addWeeklyRule();
-        };
-
-        if (row[4] === "weeklyTime") {
-            // var rcurr = CalendarApp.newRecurrence().addWeeklyRule().onlyOnWeekday(CalendarApp.Weekday.TUESDAY).atHour(19);
-        };
+        switch (row[4]) {
+            case "yearly":
+                rcurr = CalendarApp.newRecurrence().addYearlyRule();
+                break;
+            case "weekly":
+            case "weeklyTime":
+                rcurr = CalendarApp.newRecurrence().addWeeklyRule();
+                break;
+            default:
+                break;
+        }
 
         handleSingleAllDayEvent(row[0], row[1], row[3], row[2], rcurr);
     }

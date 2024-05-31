@@ -26,12 +26,23 @@ function handleSingleAllDayEvent(subject, date, description, time, recurrence) {
             Logger.log("已有相同事件&描述，未新建: " + existingEvent.getTitle());
         } else {
             // 建立新事件
-            if (recurrence === "null" || recurrence === undefined) { // 沒有重複規則就建立單一事件
-                var newEvent = calendar.createAllDayEvent(
-                    subject,
-                    date,
-                    { description: description }
-                );
+            if (!recurrence) {// 沒有重複規則就建立單一事件
+                if (time) { // 有時間就是小時事件
+                    var hours = parseInt(time, 10);
+                    date.setHours(hours);
+                    var newEvent = calendar.createEvent(
+                        subject,
+                        date,
+                        date,
+                        { description: description }
+                    )
+                } else { // 沒有時間就是全日事件
+                    var newEvent = calendar.createAllDayEvent(
+                        subject,
+                        date,
+                        { description: description }
+                    );
+                }
             } else { // 有重複規則就是重複事件
                 if (time) { // 有時間就是小時事件
                     var hours = parseInt(time, 10);
