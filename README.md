@@ -44,3 +44,12 @@
     - 運費折扣日程
     - 玩家商店日程
     - 妞妞生日還有其他的誰生日...等
+
+# 資訊來源
+
+- https://x.com/newLivlyIsland
+- https://www.facebook.com/Livlyisland.tw/
+- https://gamerch.com/livly-tw-wiki/
+- https://item.livly-lib.com/
+- https://livly-love.com/
+- https://www.plurk.com/Child_DIE
